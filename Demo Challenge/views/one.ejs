@@ -1,0 +1,19 @@
+<%- include('./components/head.ejs') %>
+
+<a href="/feed">homePage</a>
+
+<div class="container">
+    <h1 class="hh4"><%= post.name %></h1><br>
+    <label class="date"><%= post.createdAt.getDate() %>/<%= post.createdAt.getMonth() + 1 %>/<%= post.createdAt.getFullYear() %></label>
+    <h4><%= post.message %></h4>
+</div>
+
+
+</div>
+<div style="display: grid; grid-template-columns: auto auto; ">
+   <label> <a style="margin-left: 100px; color: red;" href=/remove/<%= post.id %>  style="color:crimson">Delete Article</a></label>
+   <label> <a href=/feed/edit/<%= post.id %>>Edit </a></label>
+</div>
+
+
+<%- include('./components/footer.ejs') %>

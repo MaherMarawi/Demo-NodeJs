@@ -1,0 +1,28 @@
+<%- include('./components/head.ejs') %>
+<%- include('./components/main_title.ejs') %>
+
+<label class="label-l">Add New Post</label><br>
+<%- include('./components/feedForm.ejs') %>
+
+<div class="container">
+    <% if(data.length > 0) { %>
+        <% data.forEach(post => { %>
+        
+        <h1 class="hh4"><%= post.name %></h1>
+        <label class="date"><a href=/feed/<%= post.id %>>see more</a></label><br>
+        <label class="date"><%= post.createdAt.getDate() %>/<%= post.createdAt.getMonth() + 1 %>/<%= post.createdAt.getFullYear() %></label>
+        <div class="bord">
+            <h4><%= post.message %></h4>
+            <br><br>
+        </div>
+    
+    <% }) } else { %>
+            <h3>There are no Posts to display</h3>
+    <% } %>
+    
+</div>
+
+
+
+
+<%- include('./components/footer.ejs') %>

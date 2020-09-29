@@ -1,0 +1,15 @@
+<form  method="POST" class="main_form" action=<%= new_action %>>
+    
+    <input type="text" name=name placeholder="Name" value=<%= post.name %>>
+    <% if(error && error.name) { %>
+        <p class="error"><%= error.name.message %></p>
+    <% } %>
+    <br>
+    <textarea name=message placeholder="Message" ><%= post.message %></textarea>
+    <% if(error && error.message) { %>
+        <p class="error"><%= error.message.message %></p>
+    <% } %>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+<hr>
