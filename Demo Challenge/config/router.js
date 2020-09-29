@@ -10,7 +10,7 @@ router.get('/feed/:id', controller.onepage)
 router.get('/remove/:id', controller.delete_post)
 
 router.get('/feed/edit/:id', controller.editpage)
-router.post('/feed/update/:id', controller.put_post)
+router.post('/feed/edit/:id', controller.editpage)
 
 
 module.exports = router

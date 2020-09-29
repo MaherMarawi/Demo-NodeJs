@@ -20,7 +20,6 @@ const homepage = (req, res) => {
                     .catch(err => console.log(err))
             })
     }
-    
 }
 const onepage = (req, res) => {
     Feed.findById(req.params.id)
@@ -34,13 +33,12 @@ const delete_post = (req, res) => {
 }
 
 const editpage = (req, res) => {
-    Feed.findById(req.params.id)
-        .then((result) => {res.render('edit', {title: 'edit Post', post: result, new_action: `/feed/update/${result.id}`, error:''})})
+    if (req.method === 'GET') {
+        Feed.findById(req.params.id)
+        .then((result) => {res.render('edit', {title: 'edit Post', post: result, new_action: `/feed/edit/${result.id}`, error:''})})
         .catch(err => console.log(err))
-    
-}
-const put_post = (req, res) => {
-    Feed.findByIdAndUpdate({_id: req.params.id})
+    } else {
+        Feed.findByIdAndUpdate({_id: req.params.id})
         .then(result => {
             result.name = req.body.name
             result.message = req.body.message
@@ -48,18 +46,17 @@ const put_post = (req, res) => {
                 .then((data) => res.render('one', { title: 'one post', post: data}))
                 .catch(err => {
                     Feed.findById(result.id)
-                        .then(response => {res.render('edit', {title: 'edit post', error:err.errors, post: response, new_action: `/feed/update/${result.id}`})})
+                        .then(response => {res.render('edit', {title: 'edit post', error:err.errors, post: response, new_action: `/feed/edit/${result.id}`})})
                         .catch(err => console.log(err))
-                    
                 })
         })
         .catch(err => console.log(err))
+    }
 }
 module.exports = {
     home,
     homepage,
     onepage,
     delete_post,
-    editpage,
-    put_post
+    editpage
 }
