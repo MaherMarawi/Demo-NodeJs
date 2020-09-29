@@ -18,10 +18,8 @@ const homepage = (req, res) => {
                 Feed.find()
                     .then(result => {res.render('index', {title: 'homepage', error:err.errors, data: result, new_action: '/feed', post:''})})
                     .catch(err => console.log(err))
-                
             })
     }
-    
     
 }
 const onepage = (req, res) => {
@@ -42,9 +40,6 @@ const editpage = (req, res) => {
     
 }
 const put_post = (req, res) => {
-    // Feed.findByIdAndUpdate(req.params.id, req.body, {useFindAndModify: false })
-    //     .then( (result) => {res.redirect('/')})
-    //     .catch( err => console.log(err))
     Feed.findByIdAndUpdate({_id: req.params.id})
         .then(result => {
             result.name = req.body.name
@@ -57,19 +52,14 @@ const put_post = (req, res) => {
                         .catch(err => console.log(err))
                     
                 })
-                
         })
         .catch(err => console.log(err))
 }
-
-
 module.exports = {
     home,
     homepage,
     onepage,
-
     delete_post,
-
     editpage,
     put_post
 }
