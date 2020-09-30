@@ -14,6 +14,3 @@ app.use(router)
 
 app.listen(8000)
 
-
-// const date = new Date().getMonth()
-// console.log(date + 1)
