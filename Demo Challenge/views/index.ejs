@@ -1,24 +1,21 @@
-<%- include('./components/head.ejs') %>
+<%- include('./components/header') %>
 <%- include('./components/main_title.ejs') %>
 
 <label class="label-l">Add New Post</label><br>
 <%- include('./components/feedForm.ejs') %>
 
-<div class="container">
-    <% if(data.length > 0) { %>
-        <% data.forEach(post => { %>
-        
-        <h1 class="hh4"><%= post.name %></h1>
-        <label class="date"><a href=/feed/<%= post.id %>>see more</a></label><br>
-        <label class="date"><%= post.createdAt.getDate() %>/<%= post.createdAt.getMonth() + 1 %>/<%= post.createdAt.getFullYear() %></label>
-        <div class="bord">
-            <h4><%= post.message %></h4>
-            <br><br>
-        </div>
-    
-    <% }) } else { %>
-            <h3>There are no Posts to display</h3>
-    <% } %>
+<div id="container">
+        <% if(data.length > 0) { %>
+                <% data.forEach(post => { %>
+                    <div>
+                        <h2><%= post.name %></h2>
+                        <p><a href=/feed/<%= post.id %>>see more</a></p>
+                        <p><%= post.createdAt.getDate() %>/<%= post.createdAt.getMonth() + 1 %>/<%= post.createdAt.getFullYear() %></p>
+                        <h3><%= post.message %></h3>
+                    </div>
+        <% }) } else { %>
+                <h3>There are no Posts to display</h3>
+        <% } %>
     
 </div>
 

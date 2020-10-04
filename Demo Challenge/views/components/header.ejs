@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <ul>
+        <% if (user) { %>
+            <li>Welcom, <%= user.email %></li>
+            <li><a href="/Logout">Log out</a></li>
+        <% } else { %>
+            <li><a href="/login">Log in</a></li>
+            <li><a href="/signup">Sign up</a></li>
+        <% } %>
+    </ul>
+    
+    

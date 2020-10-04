@@ -1,18 +1,24 @@
 const Feed = require('../models/feedSchema')
-
+const User = require('../models/userSchema')
+const { user } = require('../middlware/authMiddlware')
 const home = (req, res) => {
-    res.redirect('/feed')
+    res.render('welcom', { title: 'Welcom'})
 }
 const homepage = (req, res) => {
     if (req.method === 'GET') {
         Feed.find()
-        .then(result => {res.render('index', {title: 'homepage', error:'', data: result, new_action: '/feed', post:''})})
+        .then(result => {
+            //res.cookie('hello', true, { httponly: true })
+            // if (user.userId) {
+            //     console.log(user.userId.id)
+            // }
+            res.render('index', {title: 'homepage', error:'', data: result, new_action: '/feed', post:''})})
+            
         .catch(err => console.log(err))
     } else {
         const feed = new Feed(req.body)
         feed.save()
             .then(() => {
-                console.log(feed)
                 res.redirect('/feed')})
             .catch(err => {
                 Feed.find()
@@ -23,12 +29,17 @@ const homepage = (req, res) => {
 }
 const onepage = (req, res) => {
     Feed.findById(req.params.id)
-        .then((result) => {res.render('one', {title: 'one post', post: result})})
+        .then((result) => {
+            // req.url = result.slug
+            // console.log(req.url)
+            // res.url = result.slug
+            // console.log(res.url)
+            res.render('one', {title: 'one post', post: result })})
         .catch(err => console.log(err))
 }
 const delete_post = (req, res) => {
     Feed.findByIdAndDelete(req.params.id)
-        .then((result) => {res.redirect('/feed')})
+        .then(() => {res.redirect('/feed')})
         .catch(err => console.log(err))
 }
 
